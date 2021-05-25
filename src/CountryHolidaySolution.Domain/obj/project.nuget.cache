@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "lPQtHlAvvW3+5FH1fPkWHNfmZQ8edHjZKNLV2BpBLtcx+cdPzGeXnKNBTghfPBX+kgu8MFwsekPnTXMmtiQSMA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\kater\\Documents\\dot-net\\CountryHolidaySolution\\src\\CountryHolidaySolution.Domain\\CountryHolidaySolution.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\kater\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

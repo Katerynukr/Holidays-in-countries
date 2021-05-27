@@ -27,7 +27,11 @@ namespace CountryHolidaySolution.WebAPI
                 {
                     var context = services.GetRequiredService<DataContext>();
                     context.Database.Migrate(); 
-                    await SeedData.Initialize(services);
+                    if (!context.Countries.Any()) 
+                    {
+                        await SeedData.Initialize(services);
+                    }
+                    
                 }
                 catch (Exception ex)
                 {

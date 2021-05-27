@@ -50,7 +50,7 @@ namespace CountryHolidaySolution.Domain.Enums
         prt,
         rou,
         rus,
-        sbr,
+        srb,
         sgp,
         svk,
         svn,
@@ -58,7 +58,7 @@ namespace CountryHolidaySolution.Domain.Enums
         swe,
         che,
         tur,
-        urk,
+        ukr,
         gbr,
         usa
     }

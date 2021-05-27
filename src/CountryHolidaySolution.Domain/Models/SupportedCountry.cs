@@ -12,10 +12,12 @@ namespace CountryHolidaySolution.Domain.Models
     {
         public int Id { get; set; }
         public CountryCode CountryCode { get; set; }
-        public List<RegionCode>  Regions { get; set; }
-        public List<HolidayType> HolidayTypes { get; set; }
+        public List<string> Regions { get; set; }
+        public List<string> HolidayTypes { get; set; }
         public string FullName { get; set; }
         public FromDate FromDate { get; set; }
+        public int FromDateId { get; set; }
         public ToDate ToDate { get; set; }
+        public int ToDateId { get; set; }
     }
 }

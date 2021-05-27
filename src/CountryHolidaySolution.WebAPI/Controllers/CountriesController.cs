@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,6 +27,12 @@ namespace CountryHolidaySolution.WebAPI.Controllers
             var countries = await _repository.GetAll();
 
             return Ok(countries);
+        }
+
+        [HttpPost]
+        public void PostAll()
+        {
+           
         }
     }
 }

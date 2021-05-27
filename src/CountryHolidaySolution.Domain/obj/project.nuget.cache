@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "lPQtHlAvvW3+5FH1fPkWHNfmZQ8edHjZKNLV2BpBLtcx+cdPzGeXnKNBTghfPBX+kgu8MFwsekPnTXMmtiQSMA==",
+  "dgSpecHash": "RjBGHVHL/xh4rHrCpzjmtYlu6gdbRAKDxj+QNX4YIkmM8ojVAipXFDxJMlZV5H+iTrUWn2qHWFKBsZQpMO8RPA==",
   "success": true,
   "projectFilePath": "C:\\Users\\kater\\Documents\\dot-net\\CountryHolidaySolution\\src\\CountryHolidaySolution.Domain\\CountryHolidaySolution.Domain.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\kater\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\5.0.6\\microsoft.entityframeworkcore.abstractions.5.0.6.nupkg.sha512",
     "C:\\Users\\kater\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512"
   ],
   "logs": []

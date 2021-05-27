@@ -10,5 +10,7 @@ namespace CountryHolidaySolution.Domain.Interfaces
     public interface ICountriesRepository
     {
         Task<IEnumerable<SupportedCountry>> GetAll();
+        Task<IEnumerable<Holiday>> GetCountryHolidaysForYear(int year, string country);
+        Task UpdateContryHolidaysForYear(IEnumerable<Holiday> holiday, string country);
     }
 }

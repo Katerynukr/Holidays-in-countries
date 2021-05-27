@@ -18,7 +18,7 @@ namespace CountryHolidaySolution.Infrastructure.Data
         {
             var context = serviceProvider.GetRequiredService<DataContext>();
 
-            using (HttpClient client = new HttpClient())
+            using (HttpClient client = new())
             {
                 var content = await client.GetStringAsync("https://kayaposoft.com/enrico/json/v2.0/?action=getSupportedCountries");
 
@@ -26,15 +26,8 @@ namespace CountryHolidaySolution.Infrastructure.Data
                 foreach (var country in countries)
                 {
                    context.Countries.Add(country);
-                    
+                    await context.SaveChangesAsync();
                 } 
-            }
-            try
-            {
-                await context.SaveChangesAsync();
-            }
-            catch(Exception e)
-            {
             }
         }
     }

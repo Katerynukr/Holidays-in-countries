@@ -1,4 +1,5 @@
 ﻿using CountryHolidaySolution.Domain.Models;
+using CountryHolidaySolution.Domain.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,9 @@ namespace CountryHolidaySolution.Domain
     {
         public static void RegisterDomainServices(this IServiceCollection services)
         {
-            services.AddScoped<SupportedCountry>();
+            //services.AddScoped<SupportedCountry>();
+            services.AddScoped<DataService>();
+            services.AddScoped<HolidayService>();
         }
     }
 }

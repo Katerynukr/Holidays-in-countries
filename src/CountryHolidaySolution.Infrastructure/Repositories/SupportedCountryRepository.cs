@@ -1,4 +1,5 @@
 ﻿using CountryHolidaySolution.Domain.Enums;
+using CountryHolidaySolution.Domain.Extensions;
 using CountryHolidaySolution.Domain.Helpers;
 using CountryHolidaySolution.Domain.Interfaces;
 using CountryHolidaySolution.Domain.Models;
@@ -13,11 +14,11 @@ using System.Threading.Tasks;
 
 namespace CountryHolidaySolution.Infrastructure.Repositories
 {
-    public class CountriesRepository : ICountriesRepository
+    public class SupportedCountryRepository : ISupportedCountryRepository
     {
         private readonly DataContext _context;
 
-        public CountriesRepository(DataContext context)
+        public SupportedCountryRepository(DataContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
@@ -30,8 +31,7 @@ namespace CountryHolidaySolution.Infrastructure.Repositories
 
         public async Task<IEnumerable<Holiday>> GetCountryHolidaysForYear(int year, string country)
         {
-            var countryCode = Enum.Parse<CountryCode>(country);
-            var countryEntity = await _context.Countries.FirstOrDefaultAsync(c => c.CountryCode == countryCode);
+            var countryEntity = await GetCountryByCountryCode(country);
             if (countryEntity.Holidays != null)
             {
                 return countryEntity.Holidays.Where(h => h.Date.Year == year).ToList();
@@ -41,16 +41,20 @@ namespace CountryHolidaySolution.Infrastructure.Repositories
 
         public async Task UpdateContryHolidaysForYear(IEnumerable<Holiday> holidays, string country)
         {
-            var countryCode = Enum.Parse<CountryCode>(country);
-            var countryEntity = _context.Countries.Where(c => c.CountryCode == countryCode).First();
+            var countryEntity = await GetCountryByCountryCode(country);
             foreach(var holiday in holidays)
             {
                 countryEntity.Holidays.Add(holiday);
             }
-            _context.Update(country);
+             _context.Update(countryEntity);
             await _context.SaveChangesAsync();
         }
 
-        
+        private async Task<SupportedCountry> GetCountryByCountryCode(string country)
+        {
+            var countryCode = country.ParseToCountryCodeEnum();
+            var countryEntity = await _context.Countries.Where(c => c.CountryCode == countryCode).FirstOrDefaultAsync();
+            return countryEntity;
+        }
     }
 }

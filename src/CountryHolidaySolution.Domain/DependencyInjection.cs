@@ -13,9 +13,10 @@ namespace CountryHolidaySolution.Domain
     {
         public static void RegisterDomainServices(this IServiceCollection services)
         {
-            //services.AddScoped<SupportedCountry>();
+            services.AddScoped<CountryDayStatusService>();
             services.AddScoped<DataService>();
             services.AddScoped<HolidayService>();
+            services.AddScoped<InputValidationService>();
         }
     }
 }

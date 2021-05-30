@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CountryHolidaySolution.Domain.Interfaces
 {
-    public interface ICountriesRepository
+    public interface ISupportedCountryRepository
     {
         Task<IEnumerable<SupportedCountry>> GetAll();
         Task<IEnumerable<Holiday>> GetCountryHolidaysForYear(int year, string country);

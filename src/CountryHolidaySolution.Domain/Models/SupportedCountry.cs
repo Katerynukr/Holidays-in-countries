@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace CountryHolidaySolution.Domain.Models
 {
-    public class SupportedCountry
+    public class SupportedCountry : CustomCountry
     {
-        public int Id { get; set; }
-        public CountryCode CountryCode { get; set; }
         public List<string> Regions { get; set; }
         public List<string> HolidayTypes { get; set; }
         public string FullName { get; set; }

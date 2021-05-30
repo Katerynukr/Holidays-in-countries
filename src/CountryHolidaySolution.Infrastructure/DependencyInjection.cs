@@ -18,7 +18,8 @@ namespace CountryHolidaySolution.Infrastructure
             var defaultConnection = configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<DataContext>( c => c.UseSqlServer(defaultConnection));
 
-            services.AddScoped<ICountriesRepository, CountriesRepository>();
+            services.AddScoped<ISupportedCountryRepository, SupportedCountryRepository>();
+            services.AddScoped<ICountryDayStatusRepository, CountryDayStatusRepository>();
         }
     }
 }

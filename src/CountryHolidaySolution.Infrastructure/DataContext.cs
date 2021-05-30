@@ -33,5 +33,6 @@ namespace CountryHolidaySolution.Infrastructure
             modelBuilder.Entity<SupportedCountry>().OwnsOne(p => p.FromDate);
         }
         public DbSet<SupportedCountry> Countries { get; set; }
+        public DbSet<CountryDayStatus> DayStatuses { get; set; }
     }
 }

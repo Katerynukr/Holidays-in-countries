@@ -14,15 +14,17 @@ namespace CountryHolidaySolution.WebAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CountriesController : ControllerBase
+    public class SupportedCountryController : ControllerBase
     {
-        private readonly ICountriesRepository _repository;
+        private readonly ISupportedCountryRepository _repository;
         private readonly HolidayService _holidayService;
+        private readonly CountryDayStatusService _countryDayStatusService;
 
-        public CountriesController(ICountriesRepository repository, HolidayService holidayService)
+        public SupportedCountryController(ISupportedCountryRepository repository, HolidayService holidayService, CountryDayStatusService countryDayStatusService)
         {
-            _repository = repository ?? throw new ArgumentNullException(nameof(repository)); 
-            _holidayService = holidayService ?? throw new ArgumentNullException(nameof(holidayService)); 
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _holidayService = holidayService ?? throw new ArgumentNullException(nameof(holidayService));
+            _countryDayStatusService = countryDayStatusService ?? throw new ArgumentNullException(nameof(countryDayStatusService));
         }
 
         [HttpGet]
@@ -36,7 +38,7 @@ namespace CountryHolidaySolution.WebAPI.Controllers
         public async Task<ActionResult<IEnumerable<Holiday>>> GetCountryHolidaysByMonth(int year, string country)
         {
             var holidays = await _repository.GetCountryHolidaysForYear(year, country);
-            if( holidays.Count() > 0)
+            if (holidays.Count() > 0)
             {
                 return Ok(holidays);
             }
@@ -44,10 +46,9 @@ namespace CountryHolidaySolution.WebAPI.Controllers
             {
                 var newHolidays = await _holidayService.GetHolidays(year, country);
                 await _repository.UpdateContryHolidaysForYear(newHolidays, country);
-                var updatedHolidays = _repository.GetCountryHolidaysForYear(year, country);
+                var updatedHolidays = await _repository.GetCountryHolidaysForYear(year, country);
                 return Ok(updatedHolidays);
             }
-            
         }
     }
 }

@@ -21,9 +21,9 @@ namespace CountryHolidaySolution.Domain.Services
         {
             try
             {
-                var url = HolidayUrlHelper.GenerateHolidayUrl(year, countryCode);
+                var url = UrlHelper.GenerateHolidayUrl(year, countryCode);
                 var content = await _dataService.GetData(url);
-                var newEntities = ParsingHolidayHelper.GenerateHelodays(content);
+                var newEntities = MappingHelper.MapHoliday(content);
                 return newEntities;
             }
             catch(Exception e)

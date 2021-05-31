@@ -9,26 +9,25 @@ using System.Threading.Tasks;
 
 namespace CountryHolidaySolution.Domain.Services
 {
-    public class CountryDayStatusService
+    public class DayStatusService
     {
         private readonly DataService _dataService;
-        public CountryDayStatusService(DataService dataService)
+        public DayStatusService(DataService dataService)
         {
             _dataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
         }
 
-        private async Task<WorkDayType> GetDayType(int day, int month, int year, string country)
+        private async Task<WorkDay> GetDayType(int day, int month, int year, string country)
         {
             var url = UrlHelper.GenerateIsWorkingDayUrl(day, month, year, country);
             var content = await _dataService.GetData(url);
-            var dateType = MappingHelper.MapIsWorkingDateType(content);
-            return dateType;
-           
+            var dateType = MappingHelper.MapIsWorkingDayType(content);
+            return dateType;  
         }
 
-        private CountryDayStatus GenerateCountryCalendarDayStatus(int day, int month, int year, string country, WorkDayType dayType)
+        private DayStatus GenerateCountryDayStatus(int day, int month, int year, string country, WorkDay dayType)
         {
-            CountryDayStatus countryDayStatus = new()
+            DayStatus countryDayStatus = new()
             {
                 CountryCode = country.ParseToCountryCodeEnum(),
                 DayType = dayType,
@@ -39,10 +38,10 @@ namespace CountryHolidaySolution.Domain.Services
             return countryDayStatus;
         }
 
-        public async Task<CountryDayStatus> GetCountryDayStatus(int day, int month, int year, string country)
+        public async Task<DayStatus> GetCountryDayStatus(int day, int month, int year, string country)
         {
             var countryDayType = await GetDayType(day, month, year, country);
-            var countryCalendarDay = GenerateCountryCalendarDayStatus(day, month, year, country, countryDayType);
+            var countryCalendarDay = GenerateCountryDayStatus(day, month, year, country, countryDayType);
             return countryCalendarDay;
         }
     }

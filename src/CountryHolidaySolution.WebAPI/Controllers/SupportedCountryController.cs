@@ -33,9 +33,9 @@ namespace CountryHolidaySolution.WebAPI.Controllers
         }
 
         [HttpGet("{year}/{country}/")]
-        public async Task<ActionResult<IEnumerable<Holiday>>> GetCountryHolidaysByMonth(int year, string country)
+        public async Task<ActionResult<IEnumerable<CustomHoliday>>> GetCountryHolidaysByMonth(int year, string country)
         {
-            var holidays = await _repository.GetCountryHolidaysForYear(year, country);
+            var holidays = await _repository.GetCountryHolidaysByYear(year, country);
             if (holidays.Count() > 0)
             {
                 return Ok(holidays);
@@ -45,8 +45,8 @@ namespace CountryHolidaySolution.WebAPI.Controllers
                 try
                 {
                     var newHolidays = await _holidayService.GetHolidays(year, country);
-                    await _repository.UpdateContryHolidaysForYear(newHolidays, country);
-                    var updatedHolidays = await _repository.GetCountryHolidaysForYear(year, country);
+                    await _repository.UpdateContryHolidaysByYear(newHolidays, country);
+                    var updatedHolidays = await _repository.GetCountryHolidaysByYear(year, country);
                     return Ok(updatedHolidays);
                 }
                 catch

@@ -19,8 +19,8 @@ namespace CountryHolidaySolution.Infrastructure
             services.AddDbContext<DataContext>( c => c.UseSqlServer(defaultConnection));
 
             services.AddScoped<ISupportedCountryRepository, SupportedCountryRepository>();
-            services.AddScoped<ICountryDayStatusRepository, CountryDayStatusRepository>();
-            services.AddScoped<ICountryHolidayPeriodRepository, CountryHolidayPeriodRepository>();
+            services.AddScoped<IDayStatusRepository, DayStatusRepository>();
+            services.AddScoped<IMaxHolidayPeriodRepository, MaxHolidayPeriodRepository>();
         }
     }
 }

@@ -9,21 +9,21 @@ namespace CountryHolidaySolution.Domain.Helpers
 {
     public static class MappingHelper
     {
-        public static IEnumerable<Holiday> MapHoliday(string jsonString)
+        public static IEnumerable<CustomHoliday> MapHoliday(string jsonString)
         {
-            var holidays = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<Holiday>>(jsonString);
+            var holidays = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<CustomHoliday>>(jsonString);
             return holidays;
         }
 
-        public static WorkDayType MapIsWorkingDateType(string jsonString)
+        public static WorkDay MapIsWorkingDayType(string jsonString)
         {
-            var holidays = Newtonsoft.Json.JsonConvert.DeserializeObject<WorkDayType>(jsonString);
+            var holidays = Newtonsoft.Json.JsonConvert.DeserializeObject<WorkDay>(jsonString);
             return holidays;
         }
 
-        public static PublicHolidayDayType MapIsHolidayDateType(string jsonString)
+        public static PublicHoliday MapIsHolidayDayType(string jsonString)
         {
-            var holidays = Newtonsoft.Json.JsonConvert.DeserializeObject<PublicHolidayDayType>(jsonString);
+            var holidays = Newtonsoft.Json.JsonConvert.DeserializeObject<PublicHoliday>(jsonString);
             return holidays;
         }
     }

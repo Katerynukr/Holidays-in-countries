@@ -12,27 +12,27 @@ namespace CountryHolidaySolution.WebAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CountryHolidayPeriodController : ControllerBase
+    public class MaxHolidayPeriodController : ControllerBase
     {
-        private readonly ICountryHolidayPeriodRepository _repository;
-        private readonly HolidayPeriodService _holidayCounterService;
+        private readonly IMaxHolidayPeriodRepository _repository;
+        private readonly MaxHolidayPeriodService _maxHolidayPeriodService;
 
-        public CountryHolidayPeriodController(ICountryHolidayPeriodRepository repository, HolidayPeriodService holidayCounterService)
+        public MaxHolidayPeriodController(IMaxHolidayPeriodRepository repository, MaxHolidayPeriodService maxHolidayPeriodService)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
-            _holidayCounterService = holidayCounterService ?? throw new ArgumentNullException(nameof(holidayCounterService));
+            _maxHolidayPeriodService = maxHolidayPeriodService ?? throw new ArgumentNullException(nameof(maxHolidayPeriodService));
         }
 
         [HttpGet("{year}/{country}")]
-        public async Task<ActionResult<HolidayPeriod>> GetMaxHolidayPeriod(int year, string country)
+        public async Task<ActionResult<MaxHolidayPeriod>> GetMaxHolidayPeriod(int year, string country)
         {
             var countryMaxHolidayPeriod = await _repository.GetMaxHolidayPeriod(year, country);
             if(countryMaxHolidayPeriod == null)
             {
                 try
                 {
-                    var newHolidayPeriod = await _holidayCounterService.GetFreeDaysInRowMaxNumber(year, country);
-                    var countryMaxHolidayEntity =  _holidayCounterService.GenerateCountryMaxHolidayPeriodForYear(year, country, newHolidayPeriod);
+                    var newHolidayPeriod = await _maxHolidayPeriodService.GetMaxHolidayPeriod(year, country);
+                    var countryMaxHolidayEntity =  _maxHolidayPeriodService.GenerateCountryMaxHolidayPeriodForYear(year, country, newHolidayPeriod);
                     await _repository.PostMaxHolidayPeriod(countryMaxHolidayEntity);
                     countryMaxHolidayPeriod = await _repository.GetMaxHolidayPeriod(year, country);
                 }

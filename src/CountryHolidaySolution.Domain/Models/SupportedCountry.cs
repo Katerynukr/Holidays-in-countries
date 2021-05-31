@@ -17,6 +17,6 @@ namespace CountryHolidaySolution.Domain.Models
         public int FromDateId { get; set; }
         public ToDate ToDate { get; set; }
         public int ToDateId { get; set; }
-        public List<Holiday> Holidays { get; set; } = new(); 
+        public List<CustomHoliday> Holidays { get; set; } = new(); 
     }
 }

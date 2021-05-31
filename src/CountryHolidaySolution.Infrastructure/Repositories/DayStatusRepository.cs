@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace CountryHolidaySolution.Infrastructure.Repositories
 {
-    public class CountryDayStatusRepository : ICountryDayStatusRepository
+    public class DayStatusRepository : IDayStatusRepository
     {
         private readonly DataContext _context;
-        public CountryDayStatusRepository(DataContext context)
+        public DayStatusRepository(DataContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<CountryDayStatus> GetCountryDayStatus(int day, int month, int year, string country)
+        public async Task<DayStatus> GetDayStatus(int day, int month, int year, string country)
         {
             var countryCode = country.ParseToCountryCodeEnum();
             var countryDayStatus = await _context.DayStatuses.Where(c => c.CountryCode == countryCode &&
@@ -27,9 +27,9 @@ namespace CountryHolidaySolution.Infrastructure.Repositories
             return countryDayStatus;
         }
 
-        public async Task PostCountryDayStatus(CountryDayStatus countryDayStatus)
+        public async Task PostDayStatus(DayStatus dayStatus)
         {
-            _context.Add(countryDayStatus);
+            _context.Add(dayStatus);
             await _context.SaveChangesAsync();
         }
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CountryHolidaySolution.Domain.Models
 {
-    public class HolidayPeriod
+    public class MaxHolidayPeriod
     {
         public int Id { get; set; }
         public CountryCode Country { get; set; }

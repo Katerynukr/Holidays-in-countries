@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace CountryHolidaySolution.Domain.Interfaces
 {
-    public interface ICountryDayStatusRepository
+    public interface IDayStatusRepository
     {
-        Task<CountryDayStatus> GetCountryDayStatus(int day, int month, int year, string country);
-        Task PostCountryDayStatus(CountryDayStatus countryDayStatus);
+        Task<DayStatus> GetDayStatus(int day, int month, int year, string country);
+        Task PostDayStatus(DayStatus countryDayStatus);
     }
 }

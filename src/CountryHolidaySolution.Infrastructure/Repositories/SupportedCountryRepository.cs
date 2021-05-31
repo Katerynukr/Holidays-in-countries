@@ -29,9 +29,9 @@ namespace CountryHolidaySolution.Infrastructure.Repositories
             return countries;
         }
 
-        public async Task<IEnumerable<Holiday>> GetCountryHolidaysForYear(int year, string country)
+        public async Task<IEnumerable<CustomHoliday>> GetCountryHolidaysByYear(int year, string country)
         {
-            var countryEntity = await GetCountryByCountryCode(country);
+            var countryEntity = await GetCountry(country);
             if (countryEntity.Holidays != null)
             {
                 return countryEntity.Holidays.Where(h => h.Date.Year == year).ToList();
@@ -39,9 +39,9 @@ namespace CountryHolidaySolution.Infrastructure.Repositories
             return null;
         }
 
-        public async Task UpdateContryHolidaysForYear(IEnumerable<Holiday> holidays, string country)
+        public async Task UpdateContryHolidaysByYear(IEnumerable<CustomHoliday> holidays, string country)
         {
-            var countryEntity = await GetCountryByCountryCode(country);
+            var countryEntity = await GetCountry(country);
             foreach(var holiday in holidays)
             {
                 countryEntity.Holidays.Add(holiday);
@@ -50,7 +50,7 @@ namespace CountryHolidaySolution.Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
-        private async Task<SupportedCountry> GetCountryByCountryCode(string country)
+        private async Task<SupportedCountry> GetCountry(string country)
         {
             var countryCode = country.ParseToCountryCodeEnum();
             var countryEntity = await _context.Countries.Where(c => c.CountryCode == countryCode).FirstOrDefaultAsync();

@@ -17,7 +17,7 @@ namespace CountryHolidaySolution.Domain.Services
              _dataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
         }
 
-        public async Task<IEnumerable<Holiday>> GetHolidays(int year, string countryCode)
+        public async Task<IEnumerable<CustomHoliday>> GetHolidays(int year, string countryCode)
         {
             var url = UrlHelper.GenerateHolidayUrl(year, countryCode);
             var content = await _dataService.GetData(url);

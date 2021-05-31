@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace CountryHolidaySolution.Domain.Models
 {
-    public class CountryDayStatus : CustomCountry
+    public class DayStatus : CustomCountry
     {
-        public WorkDayType DayType { get; set; }
+        public WorkDay DayType { get; set; }
         public int Day { get; set; }
         public int Month { get; set; }
         public int Year { get; set; }

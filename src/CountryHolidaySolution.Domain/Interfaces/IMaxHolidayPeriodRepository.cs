@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace CountryHolidaySolution.Domain.Interfaces
 {
-    public interface ICountryHolidayPeriodRepository
+    public interface IMaxHolidayPeriodRepository
     {
-        Task<HolidayPeriod> GetMaxHolidayPeriod(int year, string country);
-        Task PostMaxHolidayPeriod(HolidayPeriod holiday);
+        Task<MaxHolidayPeriod> GetMaxHolidayPeriod(int year, string country);
+        Task PostMaxHolidayPeriod(MaxHolidayPeriod holiday);
     }
 }

@@ -35,12 +35,6 @@ namespace CountryHolidaySolution.Domain.Services
             {
                 days.Add(day.ToString("MM-dd-yyyy"));
             }
-            /*while (start < end)
-            {
-                //Do stuff here
-                days.Add(start.ToString("dd-mm-yyyy"));
-                start = start.AddDays(1);
-            }*/
             return days;
         }
 
@@ -48,7 +42,7 @@ namespace CountryHolidaySolution.Domain.Services
         {
             var url = UrlHelper.GenerateIsWorkingDayUrl(day, month, year, country);
             var content = await _dataService.GetData(url);
-            var dayType = MappingHelper.MapIsWorkingDateType(content);
+            var dayType = MappingHelper.MapIsWorkingDayType(content);
             return dayType.IsWorkDay;
         }
 
@@ -56,7 +50,7 @@ namespace CountryHolidaySolution.Domain.Services
         {
             var url = UrlHelper.GenerateIsPublicHolidayUrl(day, month, year, country);
             var content = await _dataService.GetData(url);
-            var dayType = MappingHelper.MapIsHolidayDateType(content);
+            var dayType = MappingHelper.MapIsHolidayDayType(content);
             return dayType.IsPublicHoliday;
         }
     }

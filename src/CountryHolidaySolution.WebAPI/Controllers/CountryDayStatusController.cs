@@ -24,16 +24,24 @@ namespace CountryHolidaySolution.WebAPI.Controllers
         }
 
         [HttpGet("{day}-{month}-{year}/{country}/")]
-        public async Task<CountryDayStatus> GetCountryDayStatus(int day, int month, int year, string country)
+        public async Task<ActionResult<Task<CountryDayStatus>>> GetCountryDayStatus(int day, int month, int year, string country)
         {
             var countryDayStatus = await _repository.GetCountryDayStatus(day, month, year, country);
             if (countryDayStatus == null)
             {
-                var newCountryDayStatus = await _countryDayStatusService.GetCountryDayStatus(day, month, year, country);
-                await _repository.PostCountryDayStatus(newCountryDayStatus);
-                countryDayStatus = await _repository.GetCountryDayStatus(day, month, year, country);
+                try
+                {
+                    var newCountryDayStatus = await _countryDayStatusService.GetCountryDayStatus(day, month, year, country);
+                    await _repository.PostCountryDayStatus(newCountryDayStatus);
+                    countryDayStatus = await _repository.GetCountryDayStatus(day, month, year, country);
+                }
+                catch
+                {
+                    return BadRequest(null);
+                }
+                
             }
-            return countryDayStatus;
+            return Ok(countryDayStatus);
         }
     }
 }

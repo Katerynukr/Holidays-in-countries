@@ -15,9 +15,15 @@ namespace CountryHolidaySolution.Domain.Helpers
             return holidays;
         }
 
-        public static CustomDayType MapDateType(string jsonString)
+        public static WorkDayType MapIsWorkingDateType(string jsonString)
         {
-            var holidays = Newtonsoft.Json.JsonConvert.DeserializeObject<CustomDayType>(jsonString);
+            var holidays = Newtonsoft.Json.JsonConvert.DeserializeObject<WorkDayType>(jsonString);
+            return holidays;
+        }
+
+        public static PublicHolidayDayType MapIsHolidayDateType(string jsonString)
+        {
+            var holidays = Newtonsoft.Json.JsonConvert.DeserializeObject<PublicHolidayDayType>(jsonString);
             return holidays;
         }
     }

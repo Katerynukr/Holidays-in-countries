@@ -17,18 +17,18 @@ namespace CountryHolidaySolution.Domain.Services
             _dataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
         }
 
-        private async Task<CustomDayType> GetDayType(int day, int month, int year, string country)
+        private async Task<WorkDayType> GetDayType(int day, int month, int year, string country)
         {
-            var url = UrlHelper.GenerateDateUrl(day, month, year, country);
+            var url = UrlHelper.GenerateIsWorkingDayUrl(day, month, year, country);
             var content = await _dataService.GetData(url);
-            var dateTypeEntity = MappingHelper.MapDateType(content);
-            return dateTypeEntity;
+            var dateType = MappingHelper.MapIsWorkingDateType(content);
+            return dateType;
            
         }
 
-        private CountryDayStatus GenerateCountryCalendarDayStatus(int day, int month, int year, string country, CustomDayType dayType)
+        private CountryDayStatus GenerateCountryCalendarDayStatus(int day, int month, int year, string country, WorkDayType dayType)
         {
-            CountryDayStatus countryDayStatusEntity = new()
+            CountryDayStatus countryDayStatus = new()
             {
                 CountryCode = country.ParseToCountryCodeEnum(),
                 DayType = dayType,
@@ -36,13 +36,13 @@ namespace CountryHolidaySolution.Domain.Services
                 Month = month,
                 Year = year
             };
-            return countryDayStatusEntity;
+            return countryDayStatus;
         }
 
         public async Task<CountryDayStatus> GetCountryDayStatus(int day, int month, int year, string country)
         {
-            var countryDayTypeEntity = await GetDayType(day, month, year, country);
-            var countryCalendarDay = GenerateCountryCalendarDayStatus(day, month, year, country, countryDayTypeEntity);
+            var countryDayType = await GetDayType(day, month, year, country);
+            var countryCalendarDay = GenerateCountryCalendarDayStatus(day, month, year, country, countryDayType);
             return countryCalendarDay;
         }
     }

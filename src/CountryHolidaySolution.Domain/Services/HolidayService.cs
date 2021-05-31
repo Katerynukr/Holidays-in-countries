@@ -14,22 +14,15 @@ namespace CountryHolidaySolution.Domain.Services
 
         public HolidayService(DataService dataService)
         {
-                _dataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
+             _dataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
         }
 
         public async Task<IEnumerable<Holiday>> GetHolidays(int year, string countryCode)
         {
-            try
-            {
-                var url = UrlHelper.GenerateHolidayUrl(year, countryCode);
-                var content = await _dataService.GetData(url);
-                var newEntities = MappingHelper.MapHoliday(content);
-                return newEntities;
-            }
-            catch(Exception e)
-            {
-                return null;
-            }
+            var url = UrlHelper.GenerateHolidayUrl(year, countryCode);
+            var content = await _dataService.GetData(url);
+            var newEntities = MappingHelper.MapHoliday(content);
+            return newEntities;
         }
     }
 }

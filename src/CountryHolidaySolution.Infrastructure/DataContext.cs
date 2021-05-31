@@ -34,5 +34,6 @@ namespace CountryHolidaySolution.Infrastructure
         }
         public DbSet<SupportedCountry> Countries { get; set; }
         public DbSet<CountryDayStatus> DayStatuses { get; set; }
+        public DbSet<HolidayPeriod> HolidayPeriods { get; set; }
     }
 }

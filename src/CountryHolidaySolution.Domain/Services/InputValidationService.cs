@@ -33,5 +33,10 @@ namespace CountryHolidaySolution.Domain.Services
                 return false;
             }
         }
+
+        public bool IsAvailableYear()
+        {
+            return false;
+        }
     }
 }

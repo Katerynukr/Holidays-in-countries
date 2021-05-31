@@ -18,13 +18,11 @@ namespace CountryHolidaySolution.WebAPI.Controllers
     {
         private readonly ISupportedCountryRepository _repository;
         private readonly HolidayService _holidayService;
-        private readonly CountryDayStatusService _countryDayStatusService;
 
-        public SupportedCountryController(ISupportedCountryRepository repository, HolidayService holidayService, CountryDayStatusService countryDayStatusService)
+        public SupportedCountryController(ISupportedCountryRepository repository, HolidayService holidayService)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
             _holidayService = holidayService ?? throw new ArgumentNullException(nameof(holidayService));
-            _countryDayStatusService = countryDayStatusService ?? throw new ArgumentNullException(nameof(countryDayStatusService));
         }
 
         [HttpGet]
@@ -44,10 +42,17 @@ namespace CountryHolidaySolution.WebAPI.Controllers
             }
             else
             {
-                var newHolidays = await _holidayService.GetHolidays(year, country);
-                await _repository.UpdateContryHolidaysForYear(newHolidays, country);
-                var updatedHolidays = await _repository.GetCountryHolidaysForYear(year, country);
-                return Ok(updatedHolidays);
+                try
+                {
+                    var newHolidays = await _holidayService.GetHolidays(year, country);
+                    await _repository.UpdateContryHolidaysForYear(newHolidays, country);
+                    var updatedHolidays = await _repository.GetCountryHolidaysForYear(year, country);
+                    return Ok(updatedHolidays);
+                }
+                catch
+                {
+                    return BadRequest(null);
+                }
             }
         }
     }

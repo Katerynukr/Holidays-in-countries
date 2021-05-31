@@ -20,6 +20,7 @@ namespace CountryHolidaySolution.Infrastructure
 
             services.AddScoped<ISupportedCountryRepository, SupportedCountryRepository>();
             services.AddScoped<ICountryDayStatusRepository, CountryDayStatusRepository>();
+            services.AddScoped<ICountryHolidayPeriodRepository, CountryHolidayPeriodRepository>();
         }
     }
 }

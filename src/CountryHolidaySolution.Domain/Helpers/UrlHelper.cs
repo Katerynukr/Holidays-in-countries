@@ -14,9 +14,15 @@ namespace CountryHolidaySolution.Domain.Helpers
             return url;
         }
 
-        public static string GenerateDateUrl(int day, int month, int year, string country)
+        public static string GenerateIsWorkingDayUrl(int day, int month, int year, string country)
         {
             var url = $"https://kayaposoft.com/enrico/json/v2.0/?action=isWorkDay&date={day}-{month}-{year}&country={country}";
+            return url;
+        }
+
+        public static string GenerateIsPublicHolidayUrl(int day, int month, int year, string country)
+        {
+            var url = $"https://kayaposoft.com/enrico/json/v2.0/?action=isPublicHoliday&date={day}-{month}-{year}&country={country}";
             return url;
         }
     }

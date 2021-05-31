@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CountryHolidaySolution.Domain.Models
 {
-    public class CustomDayType
+    public class WorkDayType
     {
         public int Id { get; set; }
-        public string IsWorkDay { get; set; }
+        public bool IsWorkDay { get; set; }
     }
 }

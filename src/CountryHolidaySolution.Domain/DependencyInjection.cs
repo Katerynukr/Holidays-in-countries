@@ -17,6 +17,8 @@ namespace CountryHolidaySolution.Domain
             services.AddScoped<DataService>();
             services.AddScoped<HolidayService>();
             services.AddScoped<InputValidationService>();
+            services.AddScoped<HolidayPeriodService>();
+            services.AddScoped<CalendarService>();
         }
     }
 }
